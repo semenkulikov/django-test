@@ -1,0 +1,27 @@
+{% if menu_tree %}
+    <ul>
+        {% for node in menu_tree %}
+            <li>
+                <a href="{{ node.item.get_url }}" class="{% if node.active %}active{% endif %}">
+                    {{ node.item.name }}
+                </a>
+                {% if node.children and node.expanded %}
+                    <ul>
+                        {% for child in node.children %}
+                            <li>
+                                <a href="{{ child.item.get_url }}" class="{% if child.active %}active{% endif %}">
+                                    {{ child.item.name }}
+                                </a>
+                                {% if child.children and child.expanded %}
+                                    {% include 'menu/draw_menu.html' with menu_tree=child.children %}
+                                {% endif %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No menu available.</p>
+{% endif %}

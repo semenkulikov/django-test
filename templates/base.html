@@ -1,0 +1,30 @@
+{% load menu_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	{% block title %}<title>TreeMenu</title>{% endblock title %}
+	<style>
+        .menu-container {
+            margin-bottom: 20px;
+        }
+
+        .active {
+            font-weight: bold;
+            color: red;
+        }
+	</style>
+</head>
+<body>
+<header>
+	{% get_menus as menus %}
+	{% for menu in menus %}
+		<div class="menu-container">
+                <h2>{{ menu.name }}</h2>
+                {% draw_menu menu.name %}
+            </div>
+	{% endfor %}
+</header>
+</body>
+</html>
